@@ -1,0 +1,7 @@
+{
+  "name": "Protectora",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
