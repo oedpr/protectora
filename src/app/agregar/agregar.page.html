@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="close()" style="display:block;">
+    </ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar perrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input type="text" (change)="nombre = $event.target.value"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Descripción</ion-label>
+      <ion-textarea name="descripcion" (change)="descripcion = $event.target.value"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Imagen</ion-label>
+      <ion-input type="file" name="imagen" (change)="imagen = $event.target.files[0]"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Raza</ion-label>
+      <ion-select name="raza" #rz (ionChange)="raza = rz.value">
+        <ion-select-option *ngFor="let raze of listaRazas" value="{{raze.id}}">{{raze.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <p>
+      <ion-icon size="large" name="information-circle-outline"></ion-icon>
+      <br>
+      ¿No encuentras tu raza?
+      <br>
+      <ion-button size="small" routerLink="/nuevaRaza">Añadir raza</ion-button>
+    </p>
+
+    <p>
+      <ion-button (click)="crear()" id="butt">ALISTAR PERRITO PARA ADOPCIÓN</ion-button>
+    </p>
+</ion-content>

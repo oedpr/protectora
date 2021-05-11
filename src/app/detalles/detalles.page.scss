@@ -1,0 +1,26 @@
+
+ion-card {
+    padding: 2em 0 0 0;
+    max-width: 600px;
+    margin: 2em auto;
+    background-color: white;
+
+    ion-item{
+        --ion-background-color: white;
+    }
+
+    ion-button{
+        font-weight: bold;
+    }
+}
+
+ion-content {
+    ion-card-content{
+        p{
+            margin-top: 1em;
+            text-align: justify;
+            font-size: 1.25em;
+            color: black;
+        }
+    }
+}

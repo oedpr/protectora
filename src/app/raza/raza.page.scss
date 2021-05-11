@@ -1,0 +1,37 @@
+ion-header{   
+    ion-back-button{
+        position: absolute;
+    }
+    ion-title {
+        text-align: center;
+    }
+}
+
+ion-content {
+
+    ion-item{
+        ion-label{
+            text-align: center;
+        }
+    }
+
+    ion-card {
+        max-width: 600px;
+        margin: 2em auto;
+        @media screen and (max-width:650px){
+            margin: 2em 2em;
+        }
+        ion-card-content{
+            background-color: white;
+            max-height: 30em;
+        }
+        ion-item {
+            --ion-background-color: white;
+            ion-label {
+                text-align: center;
+                font-weight: bold;
+                font-size: 1.25em;
+            }
+        }
+    }
+}

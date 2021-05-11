@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="close()" style="display:block;">
+    </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Adopta a <b>{{perro.nombre}}</b></ion-title>
+
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['editar/']">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+      <ion-button (click)="borrar()">
+        <ion-icon name="trash-bin-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <ion-card-content>
+
+      <ion-img [src]="perro.foto"></ion-img>
+      <p>{{perro.descripcion}}</p>
+      <i>Actualizado {{fecha}}</i>
+
+    </ion-card-content>
+    
+    <ion-item *ngIf="perro.adoptado == true; else adoptao" text-c>
+
+      <ion-button shape="round" style="width: 100%;">
+        {{perro.nombre}} ha sido adoptado
+      </ion-button>
+          
+      </ion-item>
+    <ng-template #adoptao>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input (ionInput)="comprobar($event.target.value)" type="email" placeholder="tudireccion@deemail.com"></ion-input>
+      <ion-button id="boton" disabled="true" (click)="mensaje(); adoptar();">ADOPTAR</ion-button>
+    </ion-item>
+    </ng-template>
+  </ion-card>
+
+</ion-content>
