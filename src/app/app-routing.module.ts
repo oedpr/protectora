@@ -4,44 +4,44 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/welcome/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'razas',
-    loadChildren: () => import('./razas/razas.module').then( m => m.RazasPageModule)
+    loadChildren: () => import('./pages/home/razas.module').then( m => m.RazasPageModule)
   },
   {
     path: 'raza',
     children: [
       {
         path: '',
-        loadChildren: () => import('./razas/razas.module').then( m => m.RazasPageModule)
+        loadChildren: () => import('./pages/home/razas.module').then( m => m.RazasPageModule)
       },
       {
         path: ':NombreRaza/:IdRaza',
-        loadChildren: () => import('./raza/raza.module').then( m => m.RazaPageModule)
+        loadChildren: () => import('./pages/race/raza.module').then( m => m.RazaPageModule)
       },
       {
         path: ':NombreRaza/:IdRaza/editar',
-        loadChildren: () => import('./editar/raza/raza.module').then( m => m.RazaPageModule)
+        loadChildren: () => import('./pages/race/editar/raza.module').then( m => m.RazaPageModule)
       },
       {
         path: ':NombreRaza/:IdRaza/:Nombre/:Id',
-        loadChildren: () => import('./detalles/detalles.module').then( m => m.DetallesPageModule)
+        loadChildren: () => import('./pages/dog/detalles.module').then( m => m.DetallesPageModule)
       },
       {
         path: ':NombreRaza/:IdRaza/:Nombre/:Id/editar',
-        loadChildren: () => import('./editar/perro/perro.module').then( m => m.PerroPageModule)
+        loadChildren: () => import('./pages/dog/editar/perro.module').then( m => m.PerroPageModule)
       }
     ]
   },
   {
     path: 'agregar',
-    loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
+    loadChildren: () => import('./pages/dog/nuevo/agregar.module').then( m => m.AgregarPageModule)
   },
   {
     path: 'nuevaRaza',
-    loadChildren: () => import('./nueva-raza/nueva-raza.module').then( m => m.NuevaRazaPageModule)
+    loadChildren: () => import('./pages/race/nueva/nueva-raza.module').then( m => m.NuevaRazaPageModule)
   }
 ];
 

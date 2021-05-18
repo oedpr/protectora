@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DbService } from 'src/app/servicios/db.service';
+import { DbService } from 'src/app/services/db.service';
 
 @Component({
   selector: 'app-raza',

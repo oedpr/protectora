@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { DbService } from '../servicios/db.service';
+import { DbService } from '../../services/db.service';
 import { Router } from '@angular/router';
-import { ToastyService } from '../servicios/toasty.service';
+import { ToastyService } from '../../services/toasty.service';
 
 @Component({
   selector: 'app-detalles',
