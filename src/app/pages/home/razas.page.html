@@ -7,20 +7,13 @@
 <ion-content>
 
   <ion-list>
-    <ion-item *ngFor="let raza of listFiltrada">
-        <ion-avatar slot="start" [routerLink]="['/raza', raza.nombre, raza.id]">
+    <ion-item *ngFor="let raza of listFiltrada" [routerLink]="['/raza', raza.id]">
+        <ion-avatar slot="start">
           <ion-img [src]="raza.imagen"></ion-img>
         </ion-avatar>
         <ion-label>
-        <a style="text-decoration: none; color: black;" [routerLink]="['/raza', raza.nombre, raza.id]">
           {{raza.nombre}}
-        </a>
         </ion-label>
-        <ion-buttons slot="end">
-          <ion-button [routerLink]="['/raza', raza.nombre, raza.id, 'editar']">
-            <ion-icon name="pencil"></ion-icon>
-          </ion-button>
-        </ion-buttons>
     </ion-item>
   </ion-list>
 

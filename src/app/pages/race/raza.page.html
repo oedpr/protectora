@@ -2,8 +2,7 @@
   <ion-toolbar>
 
     <ion-buttons slot="start">
-      <ion-back-button (click)="close()" style="display:block;">
-    </ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
 
     <ion-title *ngIf="enAdopcion.length > 0; else sinPerritos">
@@ -14,6 +13,13 @@
         ¡Ningún <strong>{{nombreRaza}}</strong> sin hogar!
       </ion-title>
     </ng-template>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/raza', idRaza, 'editar']">
+        <ion-icon slot="icon-only" name="pencil"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
@@ -34,7 +40,7 @@
   </ng-template>
 
 
-  <ion-card *ngFor="let perro of display" [routerLink]="[perro.nombre+'/'+perro.id]">
+  <ion-card *ngFor="let perro of display" [routerLink]="['/perro', perro.id]">
     <ion-card-content>
       <ion-img [src]="perro.foto" (click)="setImagen(perro.foto)"></ion-img>
     </ion-card-content>

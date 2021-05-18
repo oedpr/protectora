@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: ':IdRaza/editar',
-        loadChildren: () => import('./pages/race/editar/raza.module').then( m => m.RazaPageModule)
+        loadChildren: () => import('./pages/race/edit/raza.module').then( m => m.RazaPageModule)
       }
     ]
   },
@@ -32,17 +32,17 @@ const routes: Routes = [
       },
       {
         path: ':Id/editar',
-        loadChildren: () => import('./pages/dog/editar/perro.module').then( m => m.PerroPageModule)
+        loadChildren: () => import('./pages/dog/edit/perro.module').then( m => m.PerroPageModule)
       }
     ]
   },
   {
     path: 'agregar',
-    loadChildren: () => import('./pages/dog/nuevo/agregar.module').then( m => m.AgregarPageModule)
+    loadChildren: () => import('./pages/dog/new/agregar.module').then( m => m.AgregarPageModule)
   },
   {
     path: 'nuevaRaza',
-    loadChildren: () => import('./pages/race/nueva/nueva-raza.module').then( m => m.NuevaRazaPageModule)
+    loadChildren: () => import('./pages/race/new/nueva-raza.module').then( m => m.NuevaRazaPageModule)
   }
 ];
 
