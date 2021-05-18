@@ -9,6 +9,10 @@ ion-header{
 
 ion-content {
 
+    ion-toggle{
+        position: absolute;
+    }
+
     ion-item{
         ion-label{
             text-align: center;

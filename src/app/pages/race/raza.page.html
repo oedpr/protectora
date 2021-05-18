@@ -27,7 +27,7 @@
 
   <ion-item *ngIf="enAdopcion.length > 0; else sinPerros">
       <ion-toggle (click)="swap(display)"></ion-toggle>
-      <ion-label style="margin-left: -2.5em;">
+      <ion-label>
         Mostrar sólo perros en adopción ({{enAdopcion.length}})
       </ion-label>
   </ion-item>
@@ -57,7 +57,7 @@
   </ion-card>
 
   <ion-fab slot="fixed" style="bottom: 1em; right: 1em;">
-    <ion-fab-button [routerLink]="['/agregar']">
+    <ion-fab-button [routerLink]="['/perro/nuevo', idRaza]">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
