@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router } from '@angular/router';
-import { ToastyService } from '../../services/toasty.service';
+import { ToastyService } from '../../services/toasty/toasty.service';
 
 @Component({
   selector: 'app-detalles',
@@ -12,9 +12,7 @@ import { ToastyService } from '../../services/toasty.service';
 })
 export class DetallesPage implements OnInit {
   nombre = '';
-  nombreRaza = '';
   id = '';
-  idRaza = '';
   perro = {};
   fecha = '';
 
@@ -27,10 +25,7 @@ export class DetallesPage implements OnInit {
 
   async ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
-      this.nombre = paramMap.get('Nombre');
-      this.nombreRaza = paramMap.get('NombreRaza');
       this.id = paramMap.get('Id');
-      this.idRaza = paramMap.get('IdRaza');
     })
 
     this.perro = await this.db.getPerro(this.id);
@@ -51,13 +46,13 @@ export class DetallesPage implements OnInit {
     // muestra mensaje, tras borrarse.
     this.toasty.msg(3,"Acabas de borrar a "+this.nombre);
     // redirigir a pagina de razas
-    this.router.navigate(['/raza/'+this.nombreRaza]);
+    this.router.navigate(['/raza/', this.db.getRaza(this.id)]);
   }
 
   async confirmar() {
     return new Promise(async (resolve) => {
       const confirm = await this.alertController.create({
-        header: 'Eliminar a '+this.nombre,
+        header: '¿Seguro que quieres eliminar este perrito?',
         message: 'Se eliminará de forma permanente.',
         buttons: [
           {
@@ -81,7 +76,6 @@ export class DetallesPage implements OnInit {
   }
 
   async adoptar() {
-    console.log("Adoptado: "+this.nombre+" ("+this.nombreRaza+")");
     this.db.adoptarPerro(this.id);
     this.ngOnInit();
   }
@@ -89,7 +83,7 @@ export class DetallesPage implements OnInit {
   async mensaje() {
     return new Promise(async (resolve) => {
       const confirm = await this.alertController.create({
-        header: 'Gracias por adoptar a '+this.nombre,
+        header: 'Gracias por adoptar este perrito.',
         message: 'Contactaremos contigo enviándote un correo electrónico facilitándote los documentos necesarios e indicándote los siguientes pasos para la adopción.',
         buttons: [
           {
@@ -109,10 +103,6 @@ export class DetallesPage implements OnInit {
     let boton = document.getElementById('boton');
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     boton.setAttribute( 'disabled', (re.test(email) ? 'false' : 'true') );
-  }
-
-  close(){
-    this.router.navigate(['raza',this.nombreRaza,this.idRaza])
   }
 
 }

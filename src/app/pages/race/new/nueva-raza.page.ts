@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { DbService } from '../../../services/db.service';
-import { ToastyService } from '../../../services/toasty.service';
+import { ToastyService } from '../../../services/toasty/toasty.service';
 
 @Component({
   selector: 'app-nueva-raza',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
+import { RaceService } from '../../services/race/race.service';
 
 @Component({
   selector: 'app-raza',
@@ -18,14 +19,15 @@ export class RazaPage implements OnInit {
   constructor(
       private activatedRoute: ActivatedRoute,
       private db: DbService,
-      private router: Router
+      private raceService: RaceService
     ) { }
 
   async ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
-      this.nombreRaza = paramMap.get('NombreRaza');
       this.idRaza = paramMap.get('IdRaza');
     })
+
+    this.nombreRaza = (await this.raceService.getRaceNameById(this.idRaza)).toString();
     
     this.display = this.todos = this.db
       .getPerrosByRaza(this.idRaza);
@@ -46,14 +48,6 @@ export class RazaPage implements OnInit {
   swap(display){
     this.display = 
       (display == this.todos) ? this.enAdopcion : this.todos;
-  }
-
-  setImagen(foto){
-    sessionStorage.setItem('foto', foto);
-  }
-
-  close(){
-    this.router.navigate(['razas/'])
   }
 
 }

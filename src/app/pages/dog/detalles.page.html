@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button (click)="close()" style="display:block;">
-    </ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
 
     <ion-title>Adopta a <b>{{perro.nombre}}</b></ion-title>
@@ -10,10 +9,10 @@
 
     <ion-buttons slot="end">
       <ion-button [routerLink]="['editar/']">
-        <ion-icon name="pencil"></ion-icon>
+        <ion-icon slot="icon-only" name="pencil"></ion-icon>
       </ion-button>
       <ion-button (click)="borrar()">
-        <ion-icon name="trash-bin-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="trash-bin-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 

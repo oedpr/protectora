@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { DbService } from '../../../services/db.service';
-import { ToastyService } from '../../../services/toasty.service';
+import { ToastyService } from '../../../services/toasty/toasty.service';
 
 @Component({
   selector: 'app-agregar',

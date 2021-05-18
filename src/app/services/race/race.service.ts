@@ -8,10 +8,12 @@ export class RaceService {
 
   constructor(public db: AngularFirestore) { }
 
-
-
-  getRaceNameById(){
-    
+  async getRaceNameById(id: string){
+    let name:string;
+    await this.db.collection("razas").doc(id).ref.get().then( (doc) => {
+      name = doc.get("nombre");
+    })
+    return name //usar .toString() en página
   }
 
 }
