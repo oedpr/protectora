@@ -41,7 +41,7 @@
     <ion-item>
       <ion-label>Email</ion-label>
       <ion-input (ionInput)="comprobar($event.target.value)" type="email" placeholder="tudireccion@deemail.com"></ion-input>
-      <ion-button id="boton" disabled="true" (click)="mensaje(); adoptar();">ADOPTAR</ion-button>
+      <ion-button id="boton" disabled="true" (click)="adoptar(); mensaje();">ADOPTAR</ion-button>
     </ion-item>
     </ng-template>
   </ion-card>

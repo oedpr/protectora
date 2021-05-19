@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router } from '@angular/router';
 import { ToastyService } from '../../services/toasty/toasty.service';
+import { DogService } from 'src/app/services/dog/dog.service';
 
 @Component({
   selector: 'app-detalles',
@@ -20,6 +21,7 @@ export class DetallesPage implements OnInit {
     private activatedRoute : ActivatedRoute,
     public alertController : AlertController,
     private db : DbService,
+    private dogService: DogService,
     private router : Router,
     private toasty : ToastyService) { }
 
@@ -33,20 +35,11 @@ export class DetallesPage implements OnInit {
   }
 
   async borrar() {
-    //si mi condición es true
-    if (true) {
-      // muestra confirmación en forma de popup modal
-      const confirmacion = await this.confirmar();
-      // romper aquí si se presiona cancelar
-      if (!confirmacion) return;
-    }
+    const confirmacion = await this.confirmar();
+    if (!confirmacion) return;
 
-    // confirmado: sigue el código.
-    this.db.delPerro(this.id);
-    // muestra mensaje, tras borrarse.
+    this.dogService.delete(this.id);
     this.toasty.msg(3,"Acabas de borrar a "+this.nombre);
-    // redirigir a pagina de razas
-    this.router.navigate(['/raza/', this.db.getRaza(this.id)]);
   }
 
   async confirmar() {
@@ -76,7 +69,7 @@ export class DetallesPage implements OnInit {
   }
 
   async adoptar() {
-    this.db.adoptarPerro(this.id);
+    this.dogService.adopt(this.id);
     this.ngOnInit();
   }
 

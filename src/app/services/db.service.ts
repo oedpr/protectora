@@ -87,7 +87,8 @@ export class DbService {
       })
     })
   }
-
+  
+/*
   adoptarPerro(id: string){
     this.db.collection("perros")
     .doc(id)
@@ -100,6 +101,7 @@ export class DbService {
         console.log(`Perro con id ${id} borrado.`);
     });
   }
+  */
 
   async create(data: any): Promise<any> {
     await this.db
