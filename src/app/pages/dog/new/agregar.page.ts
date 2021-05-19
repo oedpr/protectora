@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { DbService } from '../../../services/db.service';
 import { ToastyService } from '../../../services/toasty/toasty.service';
+import { RaceService } from 'src/app/services/race/race.service';
 
 @Component({
   selector: 'app-agregar',
@@ -13,6 +14,10 @@ export class AgregarPage implements OnInit {
 
   listaRazas = [];
 
+  idRaza:string;
+  nombreRaza:string;
+
+
     nombre:string;
     descripcion:string;
     imagen:File;
@@ -20,16 +25,22 @@ export class AgregarPage implements OnInit {
     url:string;
 
   constructor( private db: DbService,
+              private raceService: RaceService,
               private router: Router,
               public toasty: ToastyService,
-              public storage: AngularFireStorage) { }
+              public storage: AngularFireStorage,
+              public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.listaRazas = this.db.getRazas();
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      this.idRaza = paramMap.get('IdRaza');
+    })
   }
 
-  ionViewDidEnter(){
+  async ionViewDidEnter(){
+
     this.listaRazas = this.db.getRazas();
+    this.nombreRaza = ( await this.raceService.getRaceNameById(this.idRaza)).toString()
   }
 
   async crear(){
