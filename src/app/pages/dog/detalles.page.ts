@@ -14,6 +14,7 @@ import { DogService } from 'src/app/services/dog/dog.service';
 export class DetallesPage implements OnInit {
   nombre = '';
   id = '';
+  raza = '';
   perro = {};
   fecha = '';
 
@@ -32,6 +33,7 @@ export class DetallesPage implements OnInit {
 
     this.perro = await this.db.getPerro(this.id);
     this.fecha = await this.db.getFecha(this.id);
+    this.raza = (await this.dogService.getRaceIdByDogId(this.id)).toString()
   }
 
   async borrar() {
@@ -40,6 +42,7 @@ export class DetallesPage implements OnInit {
 
     this.dogService.delete(this.id);
     this.toasty.msg(3,"Acabas de borrar a "+this.nombre);
+    this.router.navigate(['/raza', this.raza]);
   }
 
   async confirmar() {

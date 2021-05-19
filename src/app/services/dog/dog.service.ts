@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DogService {
 
-  constructor(public db: AngularFirestore,
-              public router: Router) { }
+  constructor(public db: AngularFirestore) { }
 
   collection = this.db.collection("perros");
 
@@ -17,14 +15,15 @@ export class DogService {
   }
 
   delete(id: string){
-    this.collection.doc(id).delete()
-      .then(() => { 
-        this.router.navigate(['/raza/', this.getRaceIdByDogId(id)]); 
-      });
+    this.collection.doc(id).delete();
   }
 
-  getRaceIdByDogId(id: string){
-    return "7AXaPsLFGwUNBDRJltHJ" //siempre redirige a gatoperro (cambiar)
+  async getRaceIdByDogId(id: string){
+    let race:string;
+    await this.db.collection("perros").doc(id).ref.get().then( (doc) => {
+      race = doc.get("raza");
+    })
+    return race
   }
 
 }
