@@ -28,16 +28,10 @@ export class RazaPage implements OnInit {
     })
 
     this.nombreRaza = (await this.raceService.getRaceNameById(this.idRaza)).toString();
-    
-    this.display = this.todos = this.db
-      .getPerrosByRaza(this.idRaza);
-
-    this.enAdopcion = this.db
-      .getPerrosByRazaSinAdoptar(this.idRaza);
   }
 
   ionViewWillEnter(){
-    // actualiza las listas
+    
     this.display = this.todos = this.db
     .getPerrosByRaza(this.idRaza);
 
