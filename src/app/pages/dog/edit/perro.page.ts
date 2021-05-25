@@ -36,7 +36,7 @@ export class PerroPage implements OnInit {
 
     this.original = await this.db.getPerro(this.id);
 
-    this.listaRazas = this.db.getRazas();
+    //this.listaRazas = this.db.getRazas();
 
   }
 

@@ -27,7 +27,7 @@ export class RazaPage implements OnInit {
       this.idRaza = paramMap.get('IdRaza');
     })
 
-    this.nombreRaza = (await this.raceService.getRaceNameById(this.idRaza)).toString();
+    //this.nombreRaza = (await this.raceService.getRaceNameById(this.idRaza)).toString();
   }
 
   ionViewWillEnter(){

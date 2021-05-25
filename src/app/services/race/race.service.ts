@@ -8,12 +8,35 @@ export class RaceService {
 
   constructor(public db: AngularFirestore) { }
 
-  async getRaceNameById(id: string){
-    let name:string;
-    await this.db.collection("razas").doc(id).ref.get().then( (doc) => {
-      name = doc.get("nombre");
-    })
-    return name //usar .toString() en página
+
+  getRazas(){
+    return this.db.collection("razas").valueChanges();
   }
+
+  /*
+  //observable
+  async getRaceNameById(id: string){
+   return this.db.doc(`razas/${id}`).valueChanges();
+  }
+
+  //promesa
+  async getRaceNameByIdPromesa(id: string){
+    return new Promise<string>(async (resolve, reject) => {
+      const nombre = (await this.db.firestore.doc(`razas/${id}`).get()).data().nombre;
+      resolve(nombre);
+    })
+  }
+
+  //promesa
+  async getRaceNameByIdPromesaCollection(id: string){
+    let array = [];
+    return new Promise<object[]>(async (resolve, reject) => {
+      (await this.db.firestore.collection("razas").get()).forEach(doc => {
+        array.push(doc.data());
+      });
+      resolve(array);
+    })
+  }
+  */
 
 }

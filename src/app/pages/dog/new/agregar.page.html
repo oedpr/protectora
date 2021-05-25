@@ -10,31 +10,28 @@
 <ion-content>
     <ion-item>
       <ion-label>Nombre</ion-label>
-      <ion-input type="text" (change)="nombre = $event.target.value"></ion-input>
+      <ion-input type="text" [(ngModel)]="nombre"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Descripción</ion-label>
-      <ion-textarea name="descripcion" (change)="descripcion = $event.target.value"></ion-textarea>
+      <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label>Imagen</ion-label>
-      <ion-input type="file" name="imagen" (change)="imagen = $event.target.files[0]"></ion-input>
+      <ion-input type="file" (change)="imagen = $event.target.files[0]"></ion-input>
     </ion-item>
 
-    <ion-item *ngIf="nombreRaza==undefined">
+    <ion-item>
       <ion-label>Raza</ion-label>
-      <ion-select name="raza" #rz (ionChange)="raza = rz.value">
-        <ion-select-option *ngFor="let raze of listaRazas" value="{{raze.id}}">{{raze.nombre}}</ion-select-option>
+      <ion-select *ngIf="listaRazas && listaRazas.length" [(ngModel)]="raza">
+        <ion-select-option *ngFor="let raze of listaRazas" [value]="raze.id">{{raze.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>
 
-    <ion-item *ngIf="nombreRaza!=undefined">
-      <ion-label>Raza</ion-label>
-      <ion-input type="text" value="{{nombreRaza}}" 
-      disabled style="text-transform: capitalize;"></ion-input>
-    </ion-item>
-
     <p>
-      <ion-button (click)="crear()">ALISTAR PERRITO PARA ADOPCIÓN</ion-button>
+      <ion-button (click)="agregar()" 
+      [disabled]="nombre==''||descripcion==''||imagen==undefined||raza==undefined">
+        ALISTAR PERRITO PARA ADOPCIÓN
+      </ion-button>
     </p>
 </ion-content>

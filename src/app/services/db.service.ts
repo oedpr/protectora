@@ -19,15 +19,7 @@ export class DbService {
   }
 
   getRazas(){
-    let arr = [];
-    this.db
-    .collection("razas").get()
-    .subscribe((sub) => {
-      sub.docs.forEach((doc) => {
-        arr.push(doc.data());
-      });
-    });
-    return arr;
+    return this.db.collection("razas").valueChanges();
   }
 
   getRaza(id: string): Promise<{}> {

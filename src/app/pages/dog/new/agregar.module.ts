@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -11,7 +12,8 @@ import { AgregarPage } from './agregar.page';
   imports: [
     CommonModule,
     IonicModule,
-    AgregarPageRoutingModule
+    AgregarPageRoutingModule,
+    FormsModule
   ],
   declarations: [AgregarPage]
 })
