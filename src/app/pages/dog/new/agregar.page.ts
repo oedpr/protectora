@@ -27,12 +27,13 @@ export class AgregarPage implements OnInit, OnDestroy {
   //subscripciones
   listaRazasSub:Subscription;
 
-  constructor( private db: DbService,
-              private dogService: DogService,
-              private raceService: RaceService,
-              public toasty: ToastyService,
-              public storage: AngularFireStorage,
-              public activatedRoute: ActivatedRoute) { }
+  constructor(
+    private dogService: DogService,
+    private raceService: RaceService,
+    public toasty: ToastyService,
+    public storage: AngularFireStorage,
+    public activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
 
@@ -41,9 +42,9 @@ export class AgregarPage implements OnInit, OnDestroy {
   async ionViewDidEnter(){
 
     this.listaRazasSub = this.raceService.getRazas().subscribe( data => {
-    this.listaRazas = data;
+      this.listaRazas = data;
 
-  });
+    });
 
     this.raza = this.activatedRoute.snapshot.params.IdRaza;
     //this.nombreRaza = await this.raceService.getRaceNameByIdPromesa(this.raza);
@@ -68,7 +69,7 @@ export class AgregarPage implements OnInit, OnDestroy {
         .getDownloadURL()
         .subscribe(data => {
 
-          this.db.create({
+          this.dogService.create({
             nombre: this.nombre,
             descripcion: this.descripcion,
             foto: data,

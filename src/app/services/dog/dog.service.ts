@@ -10,6 +10,13 @@ export class DogService {
 
   collection = this.db.collection("perros");
 
+  async create(data: any): Promise<any> {
+    await this.collection.add(data)
+      .then((doc) => {
+        this.db.doc(`perros/${doc.id}`).update({ id: doc.id });
+      });
+  }
+
   adopt(id: string){
     this.collection.doc(id).update({adoptado: true});
   }

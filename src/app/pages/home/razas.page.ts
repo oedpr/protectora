@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { DbService } from '../../services/db.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { RaceService } from 'src/app/services/race/race.service';
 
 @Component({
   selector: 'app-razas',
@@ -7,18 +8,28 @@ import { DbService } from '../../services/db.service';
   styleUrls: ['./razas.page.scss'],
 })
 
-export class RazasPage implements OnInit {
+export class RazasPage implements OnInit, OnDestroy {
 
+  //datos
   listadoRazas = [];
   listFiltrada = [];
+
+  //subscripciones
+  listadosSub:Subscription;
   
-  constructor( private db: DbService) { }
+  constructor( 
+    private raceService: RaceService,
+  ) { }
 
   ngOnInit() {
-    //this.listFiltrada = this.listadoRazas = this.db.getRazas();
   }
+
   ionViewWillEnter(){
-    //this.listFiltrada = this.listadoRazas = this.db.getRazas();
+
+    this.listadosSub = this.raceService.getRazas().subscribe( data => {
+      this.listFiltrada = this.listadoRazas = data;
+    });
+
   }
 
   filtrar(esto){
@@ -28,7 +39,11 @@ export class RazasPage implements OnInit {
   }
 
   ngOnDestroy() {
-    // No hay ninguna subcripción. No debería iincluir nada aquí. (?)
+
+    if (this.listadosSub){
+      this.listadosSub.unsubscribe();
+    }
+
   }
 
 }
