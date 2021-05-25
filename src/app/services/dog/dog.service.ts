@@ -25,12 +25,8 @@ export class DogService {
     this.collection.doc(id).delete();
   }
 
-  async getRaceIdByDogId(id: string){
-    let race:string;
-    await this.db.collection("perros").doc(id).ref.get().then( (doc) => {
-      race = doc.get("raza");
-    })
-    return race
+  getDogsByRace(raza: string){
+    return this.db.collection("perros", ref => ref.where("raza", "==", raza)).valueChanges();
   }
 
 }

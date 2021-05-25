@@ -64,7 +64,8 @@ export class AgregarPage implements OnInit, OnDestroy {
     )
     .then(async () => {
 
-      const subcripcion:Subscription = this.storage
+      //si lo meto en una variable para después hacer unsubscribe, no funciona
+      this.storage
         .ref(`/fotos/${rand}${this.imagen.name}`)
         .getDownloadURL()
         .subscribe(data => {
@@ -79,8 +80,8 @@ export class AgregarPage implements OnInit, OnDestroy {
           });
 
         });    
+
         this.toasty.msg(3, "Has añadido "+this.nombre+ " a la lista." );
-        subcripcion.unsubscribe();
 
     })
   }

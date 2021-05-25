@@ -26,7 +26,7 @@
 <ion-content>
 
   <ion-item *ngIf="enAdopcion.length > 0; else sinPerros">
-      <ion-toggle (click)="swap(display)"></ion-toggle>
+      <ion-toggle (click)="swap()"></ion-toggle>
       <ion-label>
         Mostrar sólo perros en adopción ({{enAdopcion.length}})
       </ion-label>

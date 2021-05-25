@@ -13,12 +13,13 @@ export class RaceService {
     return this.db.collection("razas").valueChanges();
   }
 
-  /*
+
   //observable
-  async getRaceNameById(id: string){
+  getRaceNameById(id: string){
    return this.db.doc(`razas/${id}`).valueChanges();
   }
 
+  /*
   //promesa
   async getRaceNameByIdPromesa(id: string){
     return new Promise<string>(async (resolve, reject) => {
@@ -38,5 +39,6 @@ export class RaceService {
     })
   }
   */
+  
 
 }

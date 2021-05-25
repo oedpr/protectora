@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { DogService } from 'src/app/services/dog/dog.service';
 import { DbService } from '../../services/db.service';
 import { RaceService } from '../../services/race/race.service';
 
@@ -8,18 +10,25 @@ import { RaceService } from '../../services/race/race.service';
   templateUrl: './raza.page.html',
   styleUrls: ['./raza.page.scss'],
 })
-export class RazaPage implements OnInit {
+export class RazaPage implements OnInit, OnDestroy {
 
+  //datos
   nombreRaza = '';
   idRaza = '';
+
   display = [];
-  todos = [];
   enAdopcion = [];
+  todos = [];
+
+  //subcripciones
+  listasPerrosSub:Subscription;
+  nombreRazaSub:Subscription;
 
   constructor(
       private activatedRoute: ActivatedRoute,
       private db: DbService,
-      private raceService: RaceService
+      private raceService: RaceService,
+      private dogService: DogService
     ) { }
 
   async ngOnInit() {
@@ -27,21 +36,32 @@ export class RazaPage implements OnInit {
       this.idRaza = paramMap.get('IdRaza');
     })
 
-    //this.nombreRaza = (await this.raceService.getRaceNameById(this.idRaza)).toString();
+    this.nombreRazaSub = this.raceService.getRaceNameById(this.idRaza).subscribe( data => {
+      this.nombreRaza = data["nombre"];
+    });
+
   }
 
   ionViewWillEnter(){
+     
+    this.listasPerrosSub = this.dogService.getDogsByRace(this.idRaza).subscribe( 
+      data => {
+        this.display = this.todos = data;
+        this.enAdopcion = this.todos.filter(perro => perro.adoptado==false);
+      }
+    );
     
-    this.display = this.todos = this.db
-    .getPerrosByRaza(this.idRaza);
-
-    this.enAdopcion = this.db
-    .getPerrosByRazaSinAdoptar(this.idRaza);
   }
 
-  swap(display){
-    this.display = 
-      (display == this.todos) ? this.enAdopcion : this.todos;
+  swap(){
+    this.display = (this.display == this.todos) ? this.enAdopcion : this.todos;
   }
 
+  ngOnDestroy(){
+
+    if (this.nombreRazaSub){
+      this.nombreRazaSub.unsubscribe();
+    }
+
+  }
 }

@@ -33,7 +33,7 @@ export class DetallesPage implements OnInit {
 
     this.perro = await this.db.getPerro(this.id);
     this.fecha = await this.db.getFecha(this.id);
-    this.raza = (await this.dogService.getRaceIdByDogId(this.id)).toString()
+    this.raza = this.perro["raza"];
   }
 
   async borrar() {
